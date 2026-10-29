@@ -1,16 +1,82 @@
-# React + Vite
+# TaskFlow
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+**Organize suas tarefas. Acompanhe suas atividades. Evolua sua produtividade.**
 
-Currently, two official plugins are available:
+O TaskFlow é uma aplicação web em desenvolvimento, criada com React e Vite, com o objetivo de facilitar a organização de tarefas e proporcionar uma experiência de uso simples e intuitiva.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Sobre o projeto
 
-## React Compiler
+O TaskFlow é um projeto de desenvolvimento web voltado à produtividade e à organização de atividades. Ele também faz parte da minha jornada de aprendizado em desenvolvimento frontend, permitindo aplicar conceitos de React, JavaScript, CSS e estruturação de interfaces.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tecnologias utilizadas
 
-## Expanding the Oxlint configuration
+- **React** — construção de interfaces com componentes.
+- **JavaScript** — lógica e interatividade da aplicação.
+- **Vite** — ambiente de desenvolvimento e build.
+- **CSS** — estilização e apresentação visual.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+## Como executar o projeto
+
+### Pré-requisitos
+
+- [Node.js](https://nodejs.org/)
+- npm, incluído na instalação do Node.js.
+- Git, para clonar o repositório.
+
+### Instalação
+
+1. Clone o repositório:
+
+   ```bash
+   git clone URL_DO_SEU_REPOSITORIO
+   ```
+
+2. Entre na pasta do projeto:
+
+   ```bash
+   cd taskflow
+   ```
+
+3. Instale as dependências:
+
+   ```bash
+   npm install
+   ```
+
+4. Inicie o servidor de desenvolvimento:
+
+   ```bash
+   npm run dev
+   ```
+
+5. Abra no navegador o endereço exibido no terminal.
+
+## Executar build de produção
+
+Para gerar a versão de produção:
+
+```bash
+npm run build
+```
+
+Para visualizar a versão gerada localmente:
+
+```bash
+npm run preview
+```
+
+## Status do projeto
+
+**Em desenvolvimento.**
+
+Novas melhorias e funcionalidades poderão ser adicionadas durante a evolução do projeto.
+
+## Autor
+
+Desenvolvido por **Thierry Barreto**.
+
+- GitHub: [@devthierry-sky](https://github.com/devthierry-sky)
+
+---
+
+Projeto desenvolvido para praticar e aprimorar conhecimentos em desenvolvimento web com React e JavaScript.
