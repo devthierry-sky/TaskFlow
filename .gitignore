@@ -1,0 +1,52 @@
+
+# Dependências
+node_modules/
+
+# Build de produção
+dist/
+dist-ssr/
+
+# Arquivos de ambiente e segredos
+.env
+.env.*
+!.env.example
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Arquivos temporários e cache
+*.local
+.cache/
+.vite/
+.temp/
+tmp/
+temp/
+
+# Editores
+.vscode/*
+!.vscode/extensions.json
+.idea/
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Arquivos do Windows e Visual Studio
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Cobertura de testes
+coverage/
+
+# Arquivos de depuração
+npm-debug.log*
