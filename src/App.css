@@ -43,6 +43,117 @@
   font-weight: 700;
   margin-bottom: 0;
 }
+.task-list {
+  margin-top: 24px;
+  padding: 24px;
+  background-color: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+}
+.task-list h2 {
+  margin: 0 0 20px;
+  color: #111827;
+  font-size: 1.25rem;
+}.task-form {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.task-form input {
+  flex: 1;
+  min-width: 0;
+  padding: 12px 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+}
+.task-form input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgb(37 99 235 / 12%);
+}
+.task-form button {
+  padding: 12px 18px;
+  border: none;
+  border-radius: 8px;
+  background-color: #2563eb;
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+.task-form button:hover {
+  background-color: #1d4ed8;
+}
+.task-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px;
+  margin-bottom: 10px;
+  background-color: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+}
+.task.item:last-child {
+  margin-bottom: 0;
+}
+.task-item p {
+  flex: 1;
+  margin: 0;
+  color: #374151;
+  overflow-wrap: anywhere;
+}
+.task-item.completed p {
+  color: #15803d;
+  text-decoration: line-through;
+}
+.remove-button {
+  padding: 8px 12px;
+  border: 1px solid #dc2626;
+  border-radius: 6px;
+  color: #fff;
+  background-color: #dc2626;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+.remove-button:hover {
+  color: #111827;
+  background-color: #fee2e2;
+}
+.complete-button {
+  padding: 8px 12px;
+  border: 1px solid #16a34a;
+  border-radius: 6px;
+  background-color: transparent;
+  color: #15803d;
+  cursor: pointer;
+}
+.complete-button:hover {
+  background-color: #dcfce7;
+}
+@media (max-width: 480px) {
+  .task-item {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+  .remove-button {
+    flex-shrink: 0;
+  }
+}
+@media (max-width: 400px) {
+  .task-list {
+    padding: 16px;
+  }
+  .task-form {
+    flex-direction: column;
+  }
+  .task-form button {
+    width: 100%;
+  }
+}
 @media (max-width: 650px) {
   .stats {
     grid-template-columns: 1fr;
