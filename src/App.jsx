@@ -13,10 +13,7 @@ function App() {
   ]);
 
   const [novaTarefa, setNovaTarefas] = useState("");
-
-  const novaLista = tarefas.filter(
-    (tarefa) => tarefa !== "Praticar JavaScript"
-);
+  const [filtro, setFiltro] = useState("Todas");
 
   function removerTarefa(tarefaRemover) {
     const novaLista = tarefas.filter(
@@ -49,6 +46,22 @@ function App() {
     setTarefas(novaLista);
   }
 
+    const totalTarefas = tarefas.length;
+
+    const tarefasConcluidas = tarefas.filter(
+      (tarefa) => tarefa.concluida
+    ).length;
+
+    const tarefasPendentes = totalTarefas - tarefasConcluidas;
+
+    const tarefasFiltradas = tarefas.filter ((tarefa) => {
+      return (
+        filtro === "Todas" ||
+        (filtro === "Pendentes" && tarefa.concluida === false) ||
+        (filtro === "Concluídas" && tarefa.concluida === true)
+      );
+    });
+
   return (
     <>
     <main className='dashboard'>
@@ -58,9 +71,9 @@ function App() {
       </header>
 
       <section className='stats'>
-        <Statcard title= "Total de tarefas" value={12} />
-        <Statcard title= "Tarefas pendentes" value= {8} />
-        <Statcard title= "Tarefas concluidas" value= {4} />
+        <Statcard title= "Total de tarefas" value={totalTarefas} />
+        <Statcard title= "Tarefas pendentes" value= {tarefasPendentes} />
+        <Statcard title= "Tarefas concluidas" value= {tarefasConcluidas} />
       </section>
 
       <section className='task-list'>
@@ -70,8 +83,24 @@ function App() {
           <input type="text" placeholder='Digite uma nova tarefa...' value={novaTarefa} onChange={(evento) => setNovaTarefas(evento.target.value)} />
           <button type='submit'>Adicionar</button>
         </form>
-
-        {tarefas.map((tarefa) => (
+        <div className='task-filters'>
+          <button
+            className={filtro === "Todas" ? "active" : ""} 
+            onClick={() => setFiltro("Todas")}>
+              Todas
+          </button>
+          <button
+            className={filtro === "Pendentes" ? "active" : ""}
+            onClick={() => setFiltro("Pendentes")}>
+              Pendentes
+          </button>
+          <button 
+            className={filtro === "Concluídas" ? "active" : ""}
+            onClick={() => setFiltro("Concluídas")}>
+              Concluídas
+          </button>
+        </div>
+        {tarefasFiltradas.map((tarefa) => (
           <div className={`task-item ${tarefa.concluida ?"completed" : ""}`} key={tarefa.texto}>
             <p>{tarefa.texto}</p>
 
