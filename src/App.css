@@ -37,12 +37,6 @@
   font-weight: 700;
   margin-bottom: 0;
 }
-.stat-card p {
-  color: #f0f6fc;
-  font-size: 28px;
-  font-weight: 700;
-  margin-bottom: 0;
-}
 .task-list {
   margin-top: 24px;
   padding: 24px;
@@ -163,6 +157,37 @@
   background-color: #1f6feb;
   border-color: #388bfd;
   color: #FFF;
+}
+.empty-message {
+  text-align: center;
+  color: #8b949e;
+  padding: 24px 12px;
+  font-size: 14px;
+}
+.error-message {
+  color: #f85149;
+  font-size: 14px;
+  margin: 0;
+  padding: 0 12px;
+  background-color: #2d1618;
+  border: 1px solid transparent;
+  border-radius: 6px;
+
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: 
+    opacity 0.3s ease,
+    max-height 0.3s ease,
+    margin 0.3s ease,
+    padding 0.3s ease;
+}
+.error-message.visible {
+  opacity: 1;
+  max-height: 60px;
+  margin: 8px 0 12px;
+  padding: 10px 12px;
+  border-color: #f8514933;
 }
 @media (max-width: 480px) {
   .task-item {

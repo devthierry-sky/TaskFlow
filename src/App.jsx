@@ -1,19 +1,26 @@
 import Statcard from './components/StatCard'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css'
-
-
 
 function App() {
 
-  const [tarefas, setTarefas] = useState([
+  const [tarefas, setTarefas] = useState(() => {
+    const tarefasSalvas = localStorage.getItem("tarefas");
+
+    if (tarefasSalvas !== null) {
+      return JSON.parse(tarefasSalvas);
+    }
+
+    return [
     {texto: "Estudar React", concluida: false },
     {texto: "Praticar JavaScript", concluida: false },
     {texto: "Revisar o CSS", concluida: false },
-  ]);
+    ];
+  });
 
-  const [novaTarefa, setNovaTarefas] = useState("");
+  const [novaTarefa, setNovaTarefa] = useState("");
   const [filtro, setFiltro] = useState("Todas");
+  const [erro, setErro] = useState("");
 
   function removerTarefa(tarefaRemover) {
     const novaLista = tarefas.filter(
@@ -28,12 +35,23 @@ function App() {
     if (novaTarefa.trim() === "") {
       return;
     }
+
     const tarefaNova = {
       texto: novaTarefa.trim(),
       concluida: false
     };
 
+    const tarefaExiste = tarefas.some(
+      (tarefa) => tarefa.texto.trim().replace(/\s+/g, " ").toLowerCase() ===
+        novaTarefa.trim().replace(/\s+/g, " ").toLocaleLowerCase()
+    );
+    if (tarefaExiste){
+      setErro("Essa tarefa já existe!");
+      return;
+    }
+
     setTarefas([...tarefas, tarefaNova]);
+
     setNovaTarefa("");
   }
 
@@ -61,7 +79,11 @@ function App() {
         (filtro === "Concluídas" && tarefa.concluida === true)
       );
     });
-
+  
+  useEffect(() => {
+    localStorage.setItem ('tarefas', JSON.stringify(tarefas));
+  }, [tarefas]);
+  
   return (
     <>
     <main className='dashboard'>
@@ -80,9 +102,16 @@ function App() {
         <h2>Minhas tarefas</h2>
         
         <form className='task-form' onSubmit={adicionarTarefa}>
-          <input type="text" placeholder='Digite uma nova tarefa...' value={novaTarefa} onChange={(evento) => setNovaTarefas(evento.target.value)} />
+          <input type="text" placeholder='Digite uma nova tarefa...' value={novaTarefa} onChange={(evento) => 
+            {setNovaTarefa(evento.target.value);
+              setErro("");
+            }
+          } />
           <button type='submit'>Adicionar</button>
         </form>
+        <p className={`error-message ${erro ? "visible" : ""}`}>
+          {erro}
+        </p>
         <div className='task-filters'>
           <button
             className={filtro === "Todas" ? "active" : ""} 
@@ -100,11 +129,16 @@ function App() {
               Concluídas
           </button>
         </div>
-        {tarefasFiltradas.map((tarefa) => (
+        {tarefasFiltradas.length === 0 ? (
+          <p className='empty-message'>
+            Nenhuma tarefa encontrada
+          </p>
+        ) : (
+        tarefasFiltradas.map((tarefa) => (
           <div className={`task-item ${tarefa.concluida ?"completed" : ""}`} key={tarefa.texto}>
             <p>{tarefa.texto}</p>
 
-            <button type='button'                          className='remove-button' onClick={() => removerTarefa(tarefa)}>
+            <button type='button' className='remove-button' onClick={() => removerTarefa(tarefa)}>
               Remover
             </button>
 
@@ -112,7 +146,8 @@ function App() {
               {tarefa.concluida ? "Desmarcar" : "Concluir"}
             </button>
           </div>
-        ))}
+          ))
+        )}
       </section>
 
     </main>
