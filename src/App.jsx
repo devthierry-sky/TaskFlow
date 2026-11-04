@@ -42,6 +42,10 @@ function App() {
   }
 
   function removerTarefa(tarefaRemover) {
+    if (tarefaEditando?.id === tarefaRemover.id) {
+      setTarefaEditando(null);
+      setTextoEditado("");
+    }
     const novaLista = tarefas.filter(
       (tarefa) => tarefa.id !== tarefaRemover.id
     );
@@ -84,7 +88,8 @@ function App() {
     const nomeExiste = tarefas.some (
       (tarefa) =>
         tarefa.id !== tarefaEditando.id &&
-      tarefa.texto.trim().toLowerCase() === textoEditado.trim().toLowerCase()
+      tarefa.texto.trim().replace(/\s+/g, " ").toLowerCase() ===
+        textoEditado.trim().replace(/\s+/g, " ").toLowerCase()
     );
     if (nomeExiste) {
       setErro("Já existe uma tarefa com esse nome!");
@@ -128,7 +133,11 @@ function App() {
     });
   
   useEffect(() => {
-    localStorage.setItem ('tarefas', JSON.stringify(tarefas));
+    try {
+      localStorage.setItem ('tarefas', JSON.stringify(tarefas));
+    } catch (erro) {
+      console.error("Erro ao salvar tarefas:", erro);
+    }
   }, [tarefas]);
 
   useEffect(() => {
@@ -178,14 +187,6 @@ function App() {
         <button
           type="button"
           className={filtro === "Todas" ? "nav-item active" : "nav-item"}
-          onClick={() => setFiltro("Todas")}>
-          <span>⌂</span>
-          Visão geral
-        </button>
-
-        <button
-          type="button"
-          className="nav-item"
           onClick={() => setFiltro("Todas")}>
           <span>☷</span>
           Todas as tarefas
